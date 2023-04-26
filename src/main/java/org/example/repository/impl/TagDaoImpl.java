@@ -4,6 +4,7 @@ import org.example.repository.CrudDao;
 import org.example.repository.entity.Tag;
 import org.example.repository.mapper.TagRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -30,8 +31,13 @@ public class TagDaoImpl implements CrudDao<Tag, Integer> {
 
     @Override
     public Optional<Tag> findById(Integer id) {
-        Tag tag = jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id}, new TagRowMapper());
-        return Optional.ofNullable(tag);
+        try {
+            Tag tag = jdbcTemplate.queryForObject(FIND_BY_ID, new Object[]{id}, new TagRowMapper());
+            return Optional.ofNullable(tag);
+        } catch (EmptyResultDataAccessException exception) {
+            return Optional.empty();
+        }
+
     }
 
     @Override

@@ -2,7 +2,9 @@ package org.example.service.mapper;
 
 import org.example.repository.entity.GiftCertificate;
 import org.example.service.dto.GiftCertificateDto;
+import org.springframework.stereotype.Component;
 
+@Component
 public class GiftCertificateMapper implements EntityMapper<GiftCertificate, GiftCertificateDto> {
     @Override
     public GiftCertificateDto mapEntityToDto(GiftCertificate giftCertificate) {

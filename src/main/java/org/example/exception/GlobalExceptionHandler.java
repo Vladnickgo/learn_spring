@@ -1,16 +1,17 @@
 package org.example.exception;
 
-import org.example.service.dto.TagDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.server.ResponseStatusException;
 
+@ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(ResponseStatusException.class)
-    public ResponseEntity<TagDto> generateException(ResponseStatusException responseStatusException) {
-        TagDto dto = new TagDto();
-        dto.setName("asd");
-        return new ResponseEntity<TagDto>(dto, HttpStatus.NOT_FOUND);
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<SpringApplicationException> handleSpringApplicationException(NotFoundException exception) {
+        String errorMessage = exception.getMessage();
+        SpringApplicationException body = new SpringApplicationException(errorMessage, ErrorCode.ENTITY_NOT_FOUND_CODE);
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 }

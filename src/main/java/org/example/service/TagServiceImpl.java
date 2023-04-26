@@ -35,7 +35,7 @@ public class TagServiceImpl implements TagService {
         if (tagDao.findById(id).isPresent()) {
             return tagMapper.mapEntityToDto(tagDao.findById(id).get());
         } else {
-            throw new NotFoundException("Not found");
+            throw new NotFoundException("Tag resource not found (id = " + id + ")");
         }
     }
 
@@ -48,5 +48,6 @@ public class TagServiceImpl implements TagService {
     @Override
     public void deleteById(Integer id) {
         tagDao.deleteById(id);
+        System.out.println("Delete");
     }
 }

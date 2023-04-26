@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import org.example.exception.NotFoundException;
 import org.example.service.TagServiceImpl;
 import org.example.service.dto.TagDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +43,5 @@ public class TagController {
         tagService.deleteById(id);
     }
 
-    @ExceptionHandler(NotFoundException.class)
-    public String handleException() {
-        return "exception";
-    }
+
 }
