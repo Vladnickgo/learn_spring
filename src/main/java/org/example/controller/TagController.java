@@ -30,10 +30,9 @@ public class TagController {
         return tagService.findById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping("/")
     @ResponseBody
     public void save(@RequestBody TagDto tagDto) {
-        System.out.println("tagDto");
         tagService.insert(tagDto);
     }
 

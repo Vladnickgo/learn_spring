@@ -9,14 +9,14 @@ CREATE TABLE IF NOT EXISTS gift_certificate
     price            INTEGER      NOT NULL,
     description      VARCHAR(255) NOT NULL,
     duration         INTEGER      NOT NULL,
-    create_date      DATETIME     NOT NULL,
-    last_update_date DATETIME     NOT NULL
+    create_date      DATE     NOT NULL,
+    last_update_date DATE     NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tag
 (
     id   INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS gift_certificate_tag

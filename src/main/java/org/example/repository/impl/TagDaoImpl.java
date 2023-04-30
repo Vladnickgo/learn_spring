@@ -49,8 +49,7 @@ public class TagDaoImpl implements CrudDao<Tag, Integer> {
     }
 
     @Override
-    public void update(Tag entity) {
-
+    public void update(Integer id, Tag entity) {
     }
 
     @Override

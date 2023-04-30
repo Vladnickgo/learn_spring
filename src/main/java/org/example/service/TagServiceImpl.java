@@ -4,7 +4,7 @@ import org.example.exception.NotFoundException;
 import org.example.repository.entity.Tag;
 import org.example.repository.impl.TagDaoImpl;
 import org.example.service.dto.TagDto;
-import org.example.service.mapper.TagMapperImpl;
+import org.example.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +13,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class TagServiceImpl implements TagService {
-    private final TagMapperImpl tagMapper;
     private final TagDaoImpl tagDao;
 
     @Autowired
-    public TagServiceImpl(TagMapperImpl tagMapper, TagDaoImpl tagDao) {
-        this.tagMapper = tagMapper;
+    public TagServiceImpl(TagDaoImpl tagDao) {
         this.tagDao = tagDao;
     }
 
@@ -26,14 +24,15 @@ public class TagServiceImpl implements TagService {
     @Override
     public List<TagDto> findAll() {
         return tagDao.findAll().stream()
-                .map(tagMapper::mapEntityToDto)
+                .map(TagMapper.INSTANCE::entityToDtoMapper)
                 .collect(Collectors.toList());
     }
 
     @Override
     public TagDto findById(Integer id) {
         if (tagDao.findById(id).isPresent()) {
-            return tagMapper.mapEntityToDto(tagDao.findById(id).get());
+            Tag tag = tagDao.findById(id).get();
+            return TagMapper.INSTANCE.entityToDtoMapper(tag);
         } else {
             throw new NotFoundException("Tag resource not found (id = " + id + ")");
         }
@@ -41,13 +40,12 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public void insert(TagDto tagDto) {
-        Tag tag = tagMapper.mapDtoToEntity(tagDto);
+        Tag tag = TagMapper.INSTANCE.dtoToEntityMapper(tagDto);
         tagDao.save(tag);
     }
 
     @Override
     public void deleteById(Integer id) {
         tagDao.deleteById(id);
-        System.out.println("Delete");
     }
 }

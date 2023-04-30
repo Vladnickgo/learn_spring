@@ -11,7 +11,7 @@ public interface CrudDao<T, ID extends Serializable> {
 
     List<T> findAll();
 
-    void update(T entity);
+    void update(ID id, T entity);
 
     void deleteById(ID id);
 }

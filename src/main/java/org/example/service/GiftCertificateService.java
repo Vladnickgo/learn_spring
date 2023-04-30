@@ -9,8 +9,10 @@ public interface GiftCertificateService {
 
     GiftCertificateDto findById(Integer id);
 
-    GiftCertificateDto insert(GiftCertificateDto giftCertificateDto);
+    void insert(GiftCertificateDto giftCertificateDto);
 
     GiftCertificateDto update(Integer id, GiftCertificateDto giftCertificateDto);
     void deleteById(Integer id);
+
+    List<GiftCertificateDto> findByTadName(String tagName, String pageNumber, String items);
 }
