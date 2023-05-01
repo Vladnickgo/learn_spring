@@ -55,15 +55,112 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
     @Override
     public void deleteById(Integer id) {
-
+        giftCertificateDao.deleteById(id);
     }
 
     @Override
-    public List<GiftCertificateDto> findByTadName(String tagName, String stringPageNumber, String stringItems) {
+    public List<GiftCertificateDto> findByTagName(String tagName, String stringPageNumber, String stringItems) {
         int items = Integer.parseInt(stringItems);
         int pageNumber = Integer.parseInt(stringPageNumber);
         Integer offSet = items * (pageNumber - 1);
         return giftCertificateDao.findByTagName(tagName, offSet, items).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> findByName(String name) {
+        return giftCertificateDao.findByName(name).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> findByDescription(String description) {
+        return giftCertificateDao.findByDescription(description).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByDescription(String description, String stringPage, String stringItems) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByDescription(description, items, offSet).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByNameSortedByNameAndDate(String name, String stringPage, String stringItems, String sortedByName, String sortedByDate) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByNameSortedByNameAndDate(name, offSet, items, sortedByName, sortedByDate).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByNameSortedByDate(String name, String stringPage, String stringItems, String sortedByDate) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByNameSortedByDate(name, offSet, items, sortedByDate).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByNameSortedByName(String name, String stringPage, String stringItems, String sortedByName) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByNameSortedByName(name, offSet, items, sortedByName).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByName(String name,
+                                                        String stringPage,
+                                                        String stringItems) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByName(name, offSet, items).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByDescriptionSortedByNameAndDate(String description, String stringPage, String stringItems, String sortedByName, String sortedByDate) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByDescriptionSortedByNameAndDate(description, items, offSet, sortedByName, sortedByDate).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByDescriptionSortedByDate(String description, String stringPage, String stringItems, String sortedByDate) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByDescriptionSortedBDate(description, items, offSet, sortedByDate).stream()
+                .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GiftCertificateDto> paginatedFindByDescriptionSortedByName(String description, String stringPage, String stringItems, String sortedByName) {
+        int pageNumber = Integer.parseInt(stringPage);
+        int items = Integer.parseInt(stringItems);
+        Integer offSet = items * (pageNumber - 1);
+        return giftCertificateDao.paginatedFindByDescriptionSortedByName(description, items, offSet, sortedByName).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }

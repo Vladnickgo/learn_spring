@@ -9,8 +9,8 @@ CREATE TABLE IF NOT EXISTS gift_certificate
     price            INTEGER      NOT NULL,
     description      VARCHAR(255) NOT NULL,
     duration         INTEGER      NOT NULL,
-    create_date      DATE     NOT NULL,
-    last_update_date DATE     NOT NULL
+    create_date      DATE         NOT NULL,
+    last_update_date DATE         NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS tag
@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS gift_certificate_tag
     gift_certificate_id INTEGER NOT NULL,
     tag_id              INTEGER NOT NULL,
     PRIMARY KEY (gift_certificate_id, tag_id),
-    FOREIGN KEY (gift_certificate_id) REFERENCES gift_certificate (id),
-    FOREIGN KEY (tag_id) REFERENCES tag (id)
+    FOREIGN KEY (gift_certificate_id) REFERENCES gift_certificate (id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tag (id) ON DELETE CASCADE
 );
