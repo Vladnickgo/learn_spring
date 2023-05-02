@@ -42,5 +42,12 @@ public class TagController {
         tagService.deleteById(id);
     }
 
+    @GetMapping("/ret")
+    public String getByParam(@RequestParam(value = "pageNo", defaultValue = "10", required = false) int pageNo,
+                             @RequestParam(value = "pageSize", defaultValue = "12", required = false) int pageSize,
+                             @RequestParam(value = "sortBy", defaultValue = "ASC", required = false) String sortBy) {
+        String out = String.format("%-10s %-5S\n%-10s %-5S\n%-10s %-5S", "pageNo:", pageNo, "pageSize:", pageSize, "sortBy:", sortBy);
+        return out;
+    }
 
 }

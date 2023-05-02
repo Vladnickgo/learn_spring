@@ -97,7 +97,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         int pageNumber = Integer.parseInt(stringPage);
         int items = Integer.parseInt(stringItems);
         Integer offSet = items * (pageNumber - 1);
-        return giftCertificateDao.paginatedFindByNameSortedByNameAndDate(name, offSet, items, sortedByName, sortedByDate).stream()
+        return giftCertificateDao.paginatedFindByNameSortedByNameAndDate(name, items, offSet, sortedByName, sortedByDate).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }
@@ -108,7 +108,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         int pageNumber = Integer.parseInt(stringPage);
         int items = Integer.parseInt(stringItems);
         Integer offSet = items * (pageNumber - 1);
-        return giftCertificateDao.paginatedFindByNameSortedByDate(name, offSet, items, sortedByDate).stream()
+        return giftCertificateDao.paginatedFindByNameSortedByDate(name, items, offSet, sortedByDate).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }
@@ -118,7 +118,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         int pageNumber = Integer.parseInt(stringPage);
         int items = Integer.parseInt(stringItems);
         Integer offSet = items * (pageNumber - 1);
-        return giftCertificateDao.paginatedFindByNameSortedByName(name, offSet, items, sortedByName).stream()
+        return giftCertificateDao.paginatedFindByNameSortedByName(name, items, offSet, sortedByName).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }
@@ -130,7 +130,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         int pageNumber = Integer.parseInt(stringPage);
         int items = Integer.parseInt(stringItems);
         Integer offSet = items * (pageNumber - 1);
-        return giftCertificateDao.paginatedFindByName(name, offSet, items).stream()
+        return giftCertificateDao.paginatedFindByName(name, items, offSet).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }
@@ -150,7 +150,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         int pageNumber = Integer.parseInt(stringPage);
         int items = Integer.parseInt(stringItems);
         Integer offSet = items * (pageNumber - 1);
-        return giftCertificateDao.paginatedFindByDescriptionSortedBDate(description, items, offSet, sortedByDate).stream()
+        return giftCertificateDao.paginatedFindByDescriptionSortedByDate(description, items, offSet, sortedByDate).stream()
                 .map(GiftCertificateMapper.INSTANCE::mapEntityToDto)
                 .collect(Collectors.toList());
     }

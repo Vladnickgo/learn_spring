@@ -70,6 +70,7 @@ public class GiftCertificateController {
 
     @GetMapping(value = {"/description/{description}",
             "/description/{description}/page/{page}/items/{items}/sorted_name/{sortedName}/sorted_date/{sortedDate}",
+            "/description/{description}/page/{page}/items/{items}/sorted_date/{sortedDate}/sorted_name/{sortedName}",
             "/description/{description}/page/{page}/items/{items}/sorted_date/{sortedDate}",
             "/description/{description}/page/{page}/items/{items}/sorted_name/{sortedName}",
             "/description/{description}/page/{page}/items/{items}"})
@@ -94,7 +95,7 @@ public class GiftCertificateController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(@PathVariable Integer id) {
         giftCertificateService.deleteById(id);
     }
 
