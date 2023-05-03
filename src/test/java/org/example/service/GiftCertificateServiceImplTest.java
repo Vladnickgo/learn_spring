@@ -143,31 +143,7 @@ class GiftCertificateServiceImplTest {
     void paginatedFindByNameSortedByNameAndDateTest() {
         when(giftCertificateDao.paginatedFindByNameSortedByNameAndDate("name", 3, 0, "ASC", "ASC"))
                 .thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByNameSortedByNameAndDate("name", "1", "3", "ASC", "ASC");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
-
-    @Test
-    void paginatedFindByNameSortedByNameTest() {
-        when(giftCertificateDao.paginatedFindByNameSortedByName("name", 3, 0, "ASC"))
-                .thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByNameSortedByName("name", "1", "3", "ASC");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
-
-    @Test
-    void paginatedFindByNameSortedByDateTest() {
-        when(giftCertificateDao.paginatedFindByNameSortedByDate("name", 3, 0, "ASC"))
-                .thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByNameSortedByDate("name", "1", "3", "ASC");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
-
-    @Test
-    void paginatedFindByNameTest() {
-        when(giftCertificateDao.paginatedFindByName("name", 3, 0))
-                .thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByName("name", "1", "3");
+        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByNameSortedByNameAndDate("name", 1, 3, "ASC", "ASC");
         Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
     }
 
@@ -179,30 +155,10 @@ class GiftCertificateServiceImplTest {
     }
 
     @Test
-    void paginatedFindByDescriptionTest() {
-        when(giftCertificateDao.paginatedFindByDescription("description", 3, 0)).thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByDescription("description", "1", "3");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
-
-    @Test
     void paginatedFindByDescriptionSortedByNameAndDate() {
         when(giftCertificateDao.paginatedFindByDescriptionSortedByNameAndDate("description", 3, 0, "ASC", "ASC")).thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByDescriptionSortedByNameAndDate("description", "1", "3", "ASC", "ASC");
+        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByDescriptionSortedByNameAndDate("description", 1, 3, "ASC", "ASC");
         Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
     }
 
-    @Test
-    void paginatedFindByDescriptionSortedByDate() {
-        when(giftCertificateDao.paginatedFindByDescriptionSortedByDate("description", 3, 0, "ASC")).thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByDescriptionSortedByDate("description", "1", "3", "ASC");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
-
-    @Test
-    void paginatedFindByDescriptionSortedByName() {
-        when(giftCertificateDao.paginatedFindByDescriptionSortedByName("description", 3, 0, "ASC")).thenReturn(ENTITY_LIST);
-        List<GiftCertificateDto> actual = giftCertificateService.paginatedFindByDescriptionSortedByName("description", "1", "3", "ASC");
-        Assertions.assertEquals(EXPECTED_GIFT_CERTIFICATE_DTO_LIST, actual);
-    }
 }
