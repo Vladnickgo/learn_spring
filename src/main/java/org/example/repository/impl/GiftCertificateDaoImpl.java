@@ -39,14 +39,6 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
             "LIKE CONCAT('%',?,'%'); ";
     private static final String FIND_BY_DESCRIPTION_PAGE_AND_ITEMS = "SELECT * FROM gift_certificate WHERE description " +
             "LIKE CONCAT('%',?,'%') LIMIT ? OFFSET ?; ";
-    private static final String FIND_BY_NAME_PAGE_AND_ITEMS_ORDER_BY_NAME_DATE = "SELECT * FROM gift_certificate WHERE name " +
-            " LIKE CONCAT('%',?,'%') ORDER BY name %S, creation_date %S LIMIT ? OFFSET ? ; ";
-
-    private static final String FIND_BY_NAME_PAGE_AND_ITEMS_ORDER_BY_NAME = "SELECT * FROM gift_certificate WHERE name " +
-            "ORDER BY name LIKE CONCAT('%',?,'%') LIMIT ? OFFSET ?; ";
-
-    private static final String FIND_BY_NAME_PAGE_AND_ITEMS_ORDER_BY_DATE = "SELECT * FROM gift_certificate WHERE name " +
-            "LIKE CONCAT('%',?,'%') LIMIT ? OFFSET ?; ";
     private static final String FIND_BY_NAME_PAGE_AND_ITEMS = "SELECT * FROM gift_certificate WHERE name " +
             "LIKE CONCAT('%',?,'%') LIMIT ? OFFSET ?; ";
     private static final String DELETE_BY_ID = "DELETE FROM gift_certificate WHERE id=?; ";
@@ -133,10 +125,6 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         );
     }
 
-    public List<GiftCertificate> paginatedFindByDescription(String description, Integer numberOfItems, Integer offSet) {
-        return getGiftCertificates(description, numberOfItems, offSet, FIND_BY_DESCRIPTION_PAGE_AND_ITEMS);
-    }
-
     private List<GiftCertificate> getGiftCertificates(String parameter, Integer numberOfItems, Integer offSet, String findByPageAndItems) {
         return jdbcTemplate.query(findByPageAndItems, ps -> {
                     ps.setString(1, parameter);
@@ -154,25 +142,9 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         );
     }
 
-    public List<GiftCertificate> paginatedFindByName(String name, Integer numberOfItems, Integer offSet) {
-        return getGiftCertificates(name, numberOfItems, offSet, FIND_BY_NAME_PAGE_AND_ITEMS);
-    }
-
-    public List<GiftCertificate> paginatedFindByNameSortedByNameAndDate(String name, Integer offSet, Integer numberOfItems, String sortedByName, String sortedByDate) {
+    public List<GiftCertificate> paginatedFindByNameSortedByNameAndDate(String name, Integer numberOfItems, Integer offSet, String sortedByName, String sortedByDate) {
         String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY name " + sortedByName +
                 ", create_date " + sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(name, numberOfItems, offSet, query);
-    }
-
-    public List<GiftCertificate> paginatedFindByNameSortedByDate(String name, Integer offSet, Integer numberOfItems, String sortedByDate) {
-        String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY create_date " +
-                sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(name, numberOfItems, offSet, query);
-    }
-
-    public List<GiftCertificate> paginatedFindByNameSortedByName(String name, Integer offSet, Integer numberOfItems, String sortedByName) {
-        String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY name " +
-                sortedByName + " LIMIT ? OFFSET ? ; ";
         return getGiftCertificates(name, numberOfItems, offSet, query);
     }
 
@@ -182,14 +154,4 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         return getGiftCertificates(description, numberOfItems, offSet, query);
     }
 
-    public List<GiftCertificate> paginatedFindByDescriptionSortedBDate(String description, Integer numberOfItems, Integer offSet, String sortedByDate) {
-        String query = "SELECT * FROM gift_certificate WHERE description LIKE CONCAT('%',?,'%') ORDER BY create_date " + sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(description, numberOfItems, offSet, query);
-
-    }
-
-    public List<GiftCertificate> paginatedFindByDescriptionSortedByName(String description, Integer numberOfItems, Integer offSet, String sortedByName) {
-        String query = "SELECT * FROM gift_certificate WHERE description LIKE CONCAT('%',?,'%') ORDER BY name " + sortedByName + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(description, numberOfItems, offSet, query);
-    }
 }

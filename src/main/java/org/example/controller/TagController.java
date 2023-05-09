@@ -3,10 +3,11 @@ package org.example.controller;
 import org.example.service.TagServiceImpl;
 import org.example.service.dto.TagDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@ComponentScan("org.example")
 @RestController
 @RequestMapping("/tag")
 public class TagController {
@@ -17,7 +18,6 @@ public class TagController {
     public TagController(TagServiceImpl tagService) {
         this.tagService = tagService;
     }
-
 
     @GetMapping(value = "/")
     @ResponseBody
@@ -41,6 +41,5 @@ public class TagController {
     public void deleteById(@PathVariable Integer id) {
         tagService.deleteById(id);
     }
-
 
 }

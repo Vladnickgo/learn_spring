@@ -21,19 +21,7 @@ public interface GiftCertificateService {
 
     List<GiftCertificateDto> findByDescription(String description);
 
-    List<GiftCertificateDto> paginatedFindByDescription(String description, String page, String items);
+    List<GiftCertificateDto> paginatedFindByNameSortedByNameAndDate(String name, int page, int items, String sortedByName, String sortedByDate);
 
-    List<GiftCertificateDto> paginatedFindByNameSortedByNameAndDate(String name, String page, String items, String sortedByName, String sortedByDate);
-
-    List<GiftCertificateDto> paginatedFindByNameSortedByDate(String name, String page, String items, String sortedByDate);
-
-    List<GiftCertificateDto> paginatedFindByNameSortedByName(String name, String page, String items, String sortedByName);
-
-    List<GiftCertificateDto> paginatedFindByName(String name, String page, String items);
-
-    List<GiftCertificateDto> paginatedFindByDescriptionSortedByNameAndDate(String description, String page, String items, String sortedByName, String sortedByDate);
-
-    List<GiftCertificateDto> paginatedFindByDescriptionSortedByDate(String description, String page, String items, String sortedByDate);
-
-    List<GiftCertificateDto> paginatedFindByDescriptionSortedByName(String description, String page, String items, String sortedByName);
+    List<GiftCertificateDto> paginatedFindByDescriptionSortedByNameAndDate(String description, int page, int items, String sortedByName, String sortedByDate);
 }

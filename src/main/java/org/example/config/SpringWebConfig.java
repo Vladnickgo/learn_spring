@@ -16,9 +16,4 @@ public class SpringWebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
     }
 
-//    @Override
-//    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
-//        resolvers.add(0, new RestResponseStatusExceptionResolver());
-//    }
-
 }

@@ -5,7 +5,6 @@ import org.example.service.dto.GiftCertificateDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/certificate")
@@ -42,59 +41,29 @@ public class GiftCertificateController {
         return giftCertificateService.update(id, giftCertificateDto);
     }
 
-    @GetMapping(value = {"/name/{name}",
-            "/name/{name}/page/{page}/items/{items}/sorted_name/{sortedName}/sorted_date/{sortedDate}",
-            "/name/{name}/page/{page}/items/{items}/sorted_date/{sortedDate}/sorted_name/{sortedName}",
-            "/name/{name}/page/{page}/items/{items}/sorted_date/{sortedDate}",
-            "/name/{name}/page/{page}/items/{items}/sorted_name/{sortedName}",
-            "/name/{name}/page/{page}/items/{items}"})
+    @GetMapping("/name/{name}")
     public List<GiftCertificateDto> findByName(@PathVariable String name,
-                                               @PathVariable Optional<String> page,
-                                               @PathVariable Optional<String> items,
-                                               @PathVariable Optional<String> sortedName,
-                                               @PathVariable Optional<String> sortedDate) {
-        if (page.isPresent() && items.isPresent() && sortedName.isPresent() && sortedDate.isPresent()) {
-            return giftCertificateService.paginatedFindByNameSortedByNameAndDate(name, page.get(), items.get(), sortedName.get(), sortedDate.get());
-        }
-        if (page.isPresent() && items.isPresent() && sortedDate.isPresent()) {
-            return giftCertificateService.paginatedFindByNameSortedByDate(name, page.get(), items.get(), sortedDate.get());
-        }
-        if (page.isPresent() && items.isPresent() && sortedName.isPresent()) {
-            return giftCertificateService.paginatedFindByNameSortedByName(name, page.get(), items.get(), sortedName.get());
-        }
-        if (page.isPresent() && items.isPresent()) {
-            return giftCertificateService.paginatedFindByName(name, page.get(), items.get());
-        }
-        return giftCertificateService.findByName(name);
+                                               @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+                                               @RequestParam(value = "items", defaultValue = "3", required = false) int items,
+                                               @RequestParam(value = "sorted_name", defaultValue = "ASC", required = false) String sortedName,
+                                               @RequestParam(value = "sorted_date", defaultValue = "ASC", required = false) String sortedDate) {
+        return giftCertificateService.paginatedFindByNameSortedByNameAndDate(name, page, items, sortedName, sortedDate);
     }
 
-    @GetMapping(value = {"/description/{description}",
-            "/description/{description}/page/{page}/items/{items}/sorted_name/{sortedName}/sorted_date/{sortedDate}",
-            "/description/{description}/page/{page}/items/{items}/sorted_date/{sortedDate}",
-            "/description/{description}/page/{page}/items/{items}/sorted_name/{sortedName}",
-            "/description/{description}/page/{page}/items/{items}"})
-    public List<GiftCertificateDto> findByDescription(@PathVariable String description,
-                                                      @PathVariable Optional<String> page,
-                                                      @PathVariable Optional<String> items,
-                                                      @PathVariable Optional<String> sortedName,
-                                                      @PathVariable Optional<String> sortedDate) {
-        if (page.isPresent() && items.isPresent() && sortedName.isPresent() && sortedDate.isPresent()) {
-            return giftCertificateService.paginatedFindByDescriptionSortedByNameAndDate(description, page.get(), items.get(), sortedName.get(), sortedDate.get());
-        }
-        if (page.isPresent() && items.isPresent() && sortedDate.isPresent()) {
-            return giftCertificateService.paginatedFindByDescriptionSortedByDate(description, page.get(), items.get(), sortedDate.get());
-        }
-        if (page.isPresent() && items.isPresent() && sortedName.isPresent()) {
-            return giftCertificateService.paginatedFindByDescriptionSortedByName(description, page.get(), items.get(), sortedName.get());
-        }
-        if (page.isPresent() && items.isPresent()) {
-            return giftCertificateService.paginatedFindByDescription(description, page.get(), items.get());
-        }
-        return giftCertificateService.findByDescription(description);
+    @GetMapping("/description/{description}")
+    public List<GiftCertificateDto> findByDescription(
+            @PathVariable String description,
+            @RequestParam(value = "page", defaultValue = "1", required = false) int page,
+            @RequestParam(value = "items", defaultValue = "3", required = false) int items,
+            @RequestParam(value = "sorted_name", defaultValue = "ASC", required = false) String sortedName,
+            @RequestParam(value = "sorted_date", defaultValue = "ASC", required = false) String sortedDate
+
+    ) {
+        return giftCertificateService.paginatedFindByDescriptionSortedByNameAndDate(description, page, items, sortedName, sortedDate);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Integer id){
+    public void deleteById(@PathVariable Integer id) {
         giftCertificateService.deleteById(id);
     }
 
