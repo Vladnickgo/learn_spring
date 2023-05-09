@@ -1,3 +1,4 @@
+USE certificate_test;
 INSERT INTO gift_certificate(name, price, description, duration, create_date, last_update_date)
 VALUES ('Alpha', 19, 'Crete', 54, '2021-07-16', '2025-08-01'),
        ('Beta', 80, 'Evia', 71, '2022-11-20', '2024-07-04'),

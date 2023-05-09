@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/learn_spring.main.iml" filepath="$PROJECT_DIR$/.idea/modules/learn_spring.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/learn_spring.test.iml" filepath="$PROJECT_DIR$/.idea/modules/learn_spring.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/org.example.learn_spring.main.iml" filepath="$PROJECT_DIR$/.idea/modules/org.example.learn_spring.main.iml" />
     </modules>
   </component>
 </project>

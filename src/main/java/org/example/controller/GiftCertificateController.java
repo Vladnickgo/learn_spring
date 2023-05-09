@@ -5,7 +5,6 @@ import org.example.service.dto.GiftCertificateDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/certificate")

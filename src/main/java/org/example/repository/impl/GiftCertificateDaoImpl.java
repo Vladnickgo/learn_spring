@@ -125,10 +125,6 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         );
     }
 
-    public List<GiftCertificate> paginatedFindByDescription(String description, Integer numberOfItems, Integer offSet) {
-        return getGiftCertificates(description, numberOfItems, offSet, FIND_BY_DESCRIPTION_PAGE_AND_ITEMS);
-    }
-
     private List<GiftCertificate> getGiftCertificates(String parameter, Integer numberOfItems, Integer offSet, String findByPageAndItems) {
         return jdbcTemplate.query(findByPageAndItems, ps -> {
                     ps.setString(1, parameter);
@@ -146,25 +142,9 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         );
     }
 
-    public List<GiftCertificate> paginatedFindByName(String name, Integer numberOfItems, Integer offSet) {
-        return getGiftCertificates(name, numberOfItems, offSet, FIND_BY_NAME_PAGE_AND_ITEMS);
-    }
-
     public List<GiftCertificate> paginatedFindByNameSortedByNameAndDate(String name, Integer numberOfItems, Integer offSet, String sortedByName, String sortedByDate) {
         String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY name " + sortedByName +
                 ", create_date " + sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(name, numberOfItems, offSet, query);
-    }
-
-    public List<GiftCertificate> paginatedFindByNameSortedByDate(String name, Integer numberOfItems, Integer offSet, String sortedByDate) {
-        String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY create_date " +
-                sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(name, numberOfItems, offSet, query);
-    }
-
-    public List<GiftCertificate> paginatedFindByNameSortedByName(String name, Integer numberOfItems, Integer offSet, String sortedByName) {
-        String query = "SELECT * FROM gift_certificate WHERE name LIKE CONCAT('%',?,'%') ORDER BY name " +
-                sortedByName + " LIMIT ? OFFSET ? ; ";
         return getGiftCertificates(name, numberOfItems, offSet, query);
     }
 
@@ -174,14 +154,4 @@ public class GiftCertificateDaoImpl implements CrudDao<GiftCertificate, Integer>
         return getGiftCertificates(description, numberOfItems, offSet, query);
     }
 
-    public List<GiftCertificate> paginatedFindByDescriptionSortedByDate(String description, Integer numberOfItems, Integer offSet, String sortedByDate) {
-        String query = "SELECT * FROM gift_certificate WHERE description LIKE CONCAT('%',?,'%') ORDER BY create_date " + sortedByDate + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(description, numberOfItems, offSet, query);
-
-    }
-
-    public List<GiftCertificate> paginatedFindByDescriptionSortedByName(String description, Integer numberOfItems, Integer offSet, String sortedByName) {
-        String query = "SELECT * FROM gift_certificate WHERE description LIKE CONCAT('%',?,'%') ORDER BY name " + sortedByName + " LIMIT ? OFFSET ? ; ";
-        return getGiftCertificates(description, numberOfItems, offSet, query);
-    }
 }

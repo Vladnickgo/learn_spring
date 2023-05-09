@@ -1,3 +1,4 @@
+USE certificate;
 INSERT INTO gift_certificate(name, price, description, duration, create_date, last_update_date)
 VALUES ('Caldwell Whitfield', 19, 'Nunc Associates', 54, '2021-07-16', '2025-08-01'),
        ('Yvonne Fitzgerald', 80, 'Nulla Integer Industries', 71, '2022-11-20', '2024-07-04'),
